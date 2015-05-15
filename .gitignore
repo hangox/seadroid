@@ -17,4 +17,6 @@ lint.xml
 .idea/
 Seadroid2.iml
 out/
+*.iml
+app/*.iml
 

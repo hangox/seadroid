@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SeafException;
 import com.seafile.seadroid2.account.Account;
 import com.seafile.seadroid2.account.AccountManager;

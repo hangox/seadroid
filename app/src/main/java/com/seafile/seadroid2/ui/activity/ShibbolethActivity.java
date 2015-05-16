@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.ui.ToastUtils;
 
 /**

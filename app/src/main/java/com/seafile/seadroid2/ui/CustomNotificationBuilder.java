@@ -6,7 +6,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.RemoteViews;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 /**
  * Extends the support class {@link android.support.v4.app.NotificationCompat.Builder} to grant that

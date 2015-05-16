@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

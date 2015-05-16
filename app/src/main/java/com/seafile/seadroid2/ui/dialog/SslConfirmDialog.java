@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.seafile.seadroid2.CertsManager;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SSLTrustManager;
 import com.seafile.seadroid2.SSLTrustManager.SslFailureReason;
 import com.seafile.seadroid2.account.Account;

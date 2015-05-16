@@ -3,7 +3,7 @@ package com.seafile.seadroid2.ui.fragment;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.transfer.TaskState;
 import com.seafile.seadroid2.transfer.TransferTaskInfo;
 import com.seafile.seadroid2.transfer.UploadTaskInfo;

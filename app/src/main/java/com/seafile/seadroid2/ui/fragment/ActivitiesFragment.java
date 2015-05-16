@@ -38,7 +38,7 @@ import com.seafile.seadroid2.ui.activity.BrowserActivity;
 import com.seafile.seadroid2.CertsManager;
 import com.seafile.seadroid2.ui.activity.FileActivity;
 import com.seafile.seadroid2.NavContext;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.account.Account;
 import com.seafile.seadroid2.data.SeafRepo;
 

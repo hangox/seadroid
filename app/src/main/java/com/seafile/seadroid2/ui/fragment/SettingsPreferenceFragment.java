@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.google.common.collect.Maps;
 import com.seafile.seadroid2.*;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SettingsManager;
 import com.seafile.seadroid2.account.Account;
 import com.seafile.seadroid2.account.AccountInfo;

@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.common.collect.Lists;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.util.Utils;
 
 import java.io.File;

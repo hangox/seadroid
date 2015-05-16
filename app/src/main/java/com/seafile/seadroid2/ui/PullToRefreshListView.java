@@ -10,7 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 /**
  * Custom pull to refresh widget

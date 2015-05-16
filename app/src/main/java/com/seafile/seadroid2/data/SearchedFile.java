@@ -1,7 +1,7 @@
 package com.seafile.seadroid2.data;
 
 import android.util.Log;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;

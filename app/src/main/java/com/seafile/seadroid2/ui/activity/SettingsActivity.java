@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.ui.fragment.SettingsPreferenceFragment;
 
 

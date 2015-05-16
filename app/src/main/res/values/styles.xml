@@ -79,13 +79,7 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="Theme.SeafileTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:logo">@drawable/icon</item>
-        <item name="logo">@drawable/icon</item>
-        <item name="android:listViewStyle">@style/SeafileListStyle</item>
-        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
-        <item name="android:radioButtonStyle">@style/RadioButton</item>
-    </style>
+
 
     <style name="SeafileListStyle" parent="@android:style/Widget.ListView">
         <item name="android:background">@color/white</item>

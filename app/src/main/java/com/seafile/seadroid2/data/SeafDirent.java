@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.util.Utils;
 
 public class SeafDirent implements SeafItem, Serializable {

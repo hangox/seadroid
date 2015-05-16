@@ -14,7 +14,7 @@ import android.util.Log;
 
 
 import com.google.common.collect.Lists;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.account.Account;
 import com.seafile.seadroid2.transfer.TransferService;
 import com.seafile.seadroid2.transfer.TransferService.TransferBinder;

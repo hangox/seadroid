@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 import java.util.Set;
 

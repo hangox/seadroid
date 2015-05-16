@@ -3,7 +3,7 @@ package com.seafile.seadroid2.fileschooser;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

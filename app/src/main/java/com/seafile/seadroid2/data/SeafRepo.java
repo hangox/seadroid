@@ -7,7 +7,7 @@ import com.seafile.seadroid2.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 /**
  * SeafRepo: A Seafile library

@@ -2,7 +2,7 @@ package com.seafile.seadroid2.cameraupload;
 
 import android.view.View;
 import android.widget.ImageView;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.data.SeafRepo;
 import com.seafile.seadroid2.ui.adapter.ReposAdapter;
 

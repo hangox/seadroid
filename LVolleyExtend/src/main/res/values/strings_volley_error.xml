@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="volley_error_auth_failure">认证失败</string>
+    <string name="volley_error_network">网络错误</string>
+    <string name="volley_error_no_connection">无网络连接</string>
+    <string name="volley_error_parse">解析错误</string>
+    <string name="volley_error_service">服务器错误</string>
+    <string name="volley_error_timeout">访问超时</string>
+    <string name="volley_unknow_error">未知错误</string>
+</resources>

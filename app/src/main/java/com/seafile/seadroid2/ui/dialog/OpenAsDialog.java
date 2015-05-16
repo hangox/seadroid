@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.ui.SeafileStyleDialogBuilder;
 
 public class OpenAsDialog extends DialogFragment {

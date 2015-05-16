@@ -10,7 +10,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.47log.seafile"
+        applicationId "me.hangox.seafile"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

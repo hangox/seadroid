@@ -16,7 +16,7 @@ package com.seafile.seadroid2.ui;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

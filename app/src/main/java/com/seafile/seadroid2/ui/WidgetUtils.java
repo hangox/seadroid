@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.webkit.MimeTypeMap;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SeadroidApplication;
 import com.seafile.seadroid2.ui.activity.BrowserActivity;
 import com.seafile.seadroid2.ui.activity.MarkdownActivity;

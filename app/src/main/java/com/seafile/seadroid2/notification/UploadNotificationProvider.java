@@ -2,7 +2,7 @@ package com.seafile.seadroid2.notification;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SeadroidApplication;
 import com.seafile.seadroid2.transfer.TaskState;
 import com.seafile.seadroid2.transfer.TransferService;

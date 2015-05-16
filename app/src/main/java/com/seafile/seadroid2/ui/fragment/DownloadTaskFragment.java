@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.transfer.DownloadTaskInfo;
 import com.seafile.seadroid2.transfer.TaskState;
 import com.seafile.seadroid2.transfer.TransferTaskInfo;

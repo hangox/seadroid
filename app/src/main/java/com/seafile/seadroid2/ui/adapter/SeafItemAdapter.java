@@ -28,7 +28,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.seafile.seadroid2.NavContext;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.SeadroidApplication;
 import com.seafile.seadroid2.data.DataManager;
 import com.seafile.seadroid2.data.SeafCachedFile;

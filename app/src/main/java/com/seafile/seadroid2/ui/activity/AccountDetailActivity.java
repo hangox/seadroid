@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.seafile.seadroid2.CertsManager;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
-import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.SeafConnection;
 import com.seafile.seadroid2.SeafException;
 import com.seafile.seadroid2.account.Account;
@@ -35,6 +34,8 @@ import com.seafile.seadroid2.util.Utils;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+
+import me.hangox.seafile.R;
 
 public class AccountDetailActivity extends SeafileActivity {
     private static final String DEBUG_TAG = "AccountDetailActivity";
@@ -58,10 +59,10 @@ public class AccountDetailActivity extends SeafileActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         //This has to be called before setContentView and you must use the
-        //class in com.actionbarsherlock.view and NOT android.view
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         setContentView(R.layout.account_detail);
 
         statusView = (TextView) findViewById(R.id.status_view);

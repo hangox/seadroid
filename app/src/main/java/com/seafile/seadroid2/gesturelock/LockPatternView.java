@@ -42,7 +42,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.google.common.collect.Lists;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 
 /**

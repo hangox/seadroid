@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 
 /**
  * clearable EditText, also supports auto complete text typing.<br/>

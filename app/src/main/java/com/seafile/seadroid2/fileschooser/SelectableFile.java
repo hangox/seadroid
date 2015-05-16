@@ -3,7 +3,7 @@ package com.seafile.seadroid2.fileschooser;
 import java.io.File;
 import java.io.FileFilter;
 
-import com.seafile.seadroid2.R;
+import me.hangox.seafile.R;
 import com.seafile.seadroid2.data.SeafItem;
 import com.seafile.seadroid2.util.Utils;
 

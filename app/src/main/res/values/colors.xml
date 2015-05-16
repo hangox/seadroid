@@ -29,6 +29,11 @@
     <color name="lv_title_color">#282828</color>
     <color name="lv_subtitle_color">#555555</color>
 
+
     <!-- Footer -->
+
+    <!--theme color-->
+    <color name="primaryColor">#FF4444</color>
+    <color name="primaryColorDark">#CC0000</color>
 
 </resources>

@@ -19,4 +19,9 @@ Seadroid2.iml
 out/
 *.iml
 app/*.iml
+app/build
+LViewpagerIndicator/build
+LViewpagerIndicator/*.iml
+LNewQuickAction/build
+LNewQuickAction/*.iml
 

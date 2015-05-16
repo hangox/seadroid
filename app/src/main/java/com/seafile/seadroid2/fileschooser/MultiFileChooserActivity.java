@@ -1,29 +1,28 @@
 package com.seafile.seadroid2.fileschooser;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.List;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.util.Utils;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager.BackStackEntry;
-import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
-import android.widget.Toast;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.List;
 
-public class MultiFileChooserActivity extends FragmentActivity implements
-OnBackStackChangedListener {
+
+public class MultiFileChooserActivity extends AppCompatActivity implements FragmentManager
+        .OnBackStackChangedListener {
 
     public static final String EXTERNAL_BASE_PATH = Environment
             .getExternalStorageDirectory().getAbsolutePath();
@@ -96,7 +95,7 @@ OnBackStackChangedListener {
 
         int count = mFragmentManager.getBackStackEntryCount();
         if (count > 0) {
-            BackStackEntry fragment = mFragmentManager
+            FragmentManager.BackStackEntry fragment = mFragmentManager
                     .getBackStackEntryAt(count - 1);
             mPath = fragment.getName();
         }

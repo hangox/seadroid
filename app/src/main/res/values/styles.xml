@@ -49,7 +49,7 @@
         <item name="centered">true</item>
     </style>
 
-    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+    <style name="CustomTabPageIndicator">
         <item name="android:background">@drawable/custom_tab_indicator</item>
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
         <item name="android:textColor">#FF555555</item>
@@ -67,7 +67,7 @@
         <item name="android:typeface">monospace</item>
     </style>
 
-    <style name="CustomUnderlinePageIndicator">
+    <style name="CustomUnderlinePageIndicator" parent="Widget.TabPageIndicator">
         <item name="selectedColor">#ee8833</item>
         <item name="android:background">#FFCCCCCC</item>
         <item name="fadeLength">1000</item>
@@ -91,8 +91,8 @@
         <item name="android:background">@color/white</item>
         <item name="android:divider">@color/list_divider</item>
         <item name="android:dividerHeight">0.5sp</item>
-        <!-- <item name="android:colorPressedHighlight">@color/black</item> -->
-        <!-- <item name="android:colorLongPressedHighlight">@color/black</item> -->
+         <item name="android:colorPressedHighlight">@color/black</item>
+         <item name="android:colorLongPressedHighlight">@color/black</item>
     </style>
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_btn_holo_light</item>

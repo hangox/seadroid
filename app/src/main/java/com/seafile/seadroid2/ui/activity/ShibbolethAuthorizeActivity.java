@@ -17,7 +17,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.SeadroidApplication;
 import com.seafile.seadroid2.account.Account;
@@ -35,7 +35,7 @@ import java.net.URLEncoder;
  * use cookie to get authorized data
  * <p/>
  */
-public class ShibbolethAuthorizeActivity extends SherlockFragmentActivity {
+public class ShibbolethAuthorizeActivity extends SeafileActivity {
     public static final String DEBUG_TAG = "ShibbolethAuthorizeActivity";
 
     public static final String SEAHUB_SHIB_COOKIE_NAME = "seahub_auth";

@@ -4,24 +4,30 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.R;
+import com.seafile.seadroid2.ui.fragment.SeafileFragment;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+;
 /**
  * Choose local directories
  */
-public class LocalDirSelectionFragment extends Fragment {
+public class LocalDirSelectionFragment extends SeafileFragment {
 
     private RelativeLayout mUpLayout;
     private TextView mCurrentDirText;

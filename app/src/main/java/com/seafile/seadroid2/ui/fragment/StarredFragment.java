@@ -1,19 +1,17 @@
 package com.seafile.seadroid2.ui.fragment;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import android.widget.Toast;
-import com.actionbarsherlock.app.SherlockListFragment;
+
 import com.seafile.seadroid2.ConcurrentAsyncTask;
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.SeafException;
@@ -25,7 +23,9 @@ import com.seafile.seadroid2.ui.activity.BrowserActivity;
 import com.seafile.seadroid2.ui.adapter.StarredItemAdapter;
 import com.seafile.seadroid2.util.Utils;
 
-public class StarredFragment extends SherlockListFragment {
+import java.util.List;
+
+public class StarredFragment extends ListFragment {
     private StarredItemAdapter adapter;
     private BrowserActivity mActivity = null;
 

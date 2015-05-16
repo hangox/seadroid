@@ -1,9 +1,5 @@
 package com.seafile.seadroid2.ui.fragment;
 
-import java.net.HttpURLConnection;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.seafile.seadroid2.CertsManager;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
 import com.seafile.seadroid2.NavContext;
@@ -38,8 +33,15 @@ import com.seafile.seadroid2.ui.dialog.SslConfirmDialog;
 import com.seafile.seadroid2.ui.dialog.TaskDialog;
 import com.seafile.seadroid2.util.Utils;
 
+import java.net.HttpURLConnection;
+import java.util.List;
+import java.util.Map;
 
-public class ReposFragment extends SherlockListFragment {
+;
+;
+
+
+public class ReposFragment extends SeafileListFragment {
 
     private static final String DEBUG_TAG = "ReposFragment";
     

@@ -1,6 +1,9 @@
 package com.seafile.seadroid2.ui.activity;
 
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -9,12 +12,18 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
 import com.seafile.seadroid2.R;
@@ -25,8 +34,8 @@ import com.seafile.seadroid2.data.DataManager;
 import com.seafile.seadroid2.data.SeafRepo;
 import com.seafile.seadroid2.data.SearchedFile;
 import com.seafile.seadroid2.transfer.TransferService;
-import com.seafile.seadroid2.ui.WidgetUtils;
 import com.seafile.seadroid2.ui.ToastUtils;
+import com.seafile.seadroid2.ui.WidgetUtils;
 import com.seafile.seadroid2.ui.adapter.SearchAdapter;
 import com.seafile.seadroid2.util.Utils;
 
@@ -38,7 +47,7 @@ import java.util.List;
  * Search Activity
  *
  */
-public class SearchActivity extends SherlockFragmentActivity implements View.OnClickListener {
+public class SearchActivity extends SeafileActivity implements View.OnClickListener {
     private static final String DEBUG_TAG = "SearchActivity";
 
     private EditText mTextField;

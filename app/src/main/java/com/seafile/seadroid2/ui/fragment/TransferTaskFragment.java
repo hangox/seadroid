@@ -17,19 +17,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockListFragment;
+
 import com.seafile.seadroid2.R;
-import com.seafile.seadroid2.transfer.*;
+import com.seafile.seadroid2.transfer.TransferService;
+import com.seafile.seadroid2.transfer.TransferTaskInfo;
 import com.seafile.seadroid2.ui.activity.TransferActivity;
 import com.seafile.seadroid2.ui.adapter.TransferTaskAdapter;
 
 import java.util.List;
 
+;
+
 /**
  * Base class for transfer task fragments
  *
  */
-public abstract class TransferTaskFragment extends SherlockListFragment {
+public abstract class TransferTaskFragment extends SeafileFragment {
     private String DEBUG_TAG = "TransferTaskFragment";
 
     protected TransferTaskAdapter adapter;

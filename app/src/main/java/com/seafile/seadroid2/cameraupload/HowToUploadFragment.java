@@ -1,20 +1,23 @@
 package com.seafile.seadroid2.cameraupload;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.SettingsManager;
+import com.seafile.seadroid2.ui.fragment.SeafileFragment;
+
+;
 
 /**
  * How to upload fragment
  */
-public class HowToUploadFragment extends Fragment {
+public class HowToUploadFragment extends SeafileFragment {
 
     private RadioButton mDataPlanRadioBtn;
     private RadioGroup mRadioGroup;

@@ -12,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.ui.activity.BrowserActivity;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class TabsFragment extends SherlockFragment {
+
+public class TabsFragment extends SeafileFragment {
 
     private static final int[] ICONS = new int[] {
         R.drawable.tab_library, R.drawable.tab_starred,

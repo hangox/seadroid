@@ -32,7 +32,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
+import android.support.v4.app.Fragment;
 import com.seafile.seadroid2.ui.ToastUtils;
 import com.seafile.seadroid2.ui.activity.BrowserActivity;
 import com.seafile.seadroid2.CertsManager;
@@ -42,7 +42,7 @@ import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.account.Account;
 import com.seafile.seadroid2.data.SeafRepo;
 
-public class ActivitiesFragment extends SherlockFragment {
+public class ActivitiesFragment extends SeafileFragment {
     private static final String DEBUG_TAG = "ActivitiesFragment";
 
     private static final String ACTIVITIES_URL = "api2/html/events/";

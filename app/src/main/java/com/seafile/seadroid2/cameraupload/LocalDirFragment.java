@@ -1,7 +1,6 @@
 package com.seafile.seadroid2.cameraupload;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,16 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
+
 import com.seafile.seadroid2.R;
+import com.seafile.seadroid2.ui.fragment.SeafileFragment;
+
+;
+
 /**
  * Local directories fragment
  */
-public class LocalDirFragment extends Fragment {
+public class LocalDirFragment extends SeafileFragment {
 
     private CameraUploadConfigActivity mActivity;
     private FragmentManager fm;

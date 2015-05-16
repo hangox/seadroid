@@ -12,7 +12,7 @@ import android.os.IBinder;
 import android.provider.MediaStore.Images;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.account.Account;
@@ -23,7 +23,7 @@ import com.seafile.seadroid2.util.Utils;
 
 import java.util.ArrayList;
 
-public class ShareToSeafileActivity extends SherlockFragmentActivity {
+public class ShareToSeafileActivity extends SeafileActivity {
     private static final String DEBUG_TAG = "ShareToSeafileActivity";
 
     public static final String PASSWORD_DIALOG_FRAGMENT_TAG = "password_dialog_fragment_tag";

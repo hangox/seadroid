@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
+
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.ui.ToastUtils;
 
@@ -19,7 +18,7 @@ import com.seafile.seadroid2.ui.ToastUtils;
  * Shibboleth welcome page
  * <p/>
  */
-public class ShibbolethActivity extends SherlockFragmentActivity {
+public class ShibbolethActivity extends SeafileActivity {
     public static final String DEBUG_TAG = "ShibbolethActivity";
 
     public static final String SHIBBOLETH_SERVER_URL = "shibboleth server url";
@@ -118,8 +117,9 @@ public class ShibbolethActivity extends SherlockFragmentActivity {
         });
     }
 
+
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

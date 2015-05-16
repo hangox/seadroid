@@ -7,23 +7,24 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.KeyEvent;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.notification.BaseNotificationProvider;
 import com.seafile.seadroid2.notification.DownloadNotificationProvider;
-import com.seafile.seadroid2.notification.UploadNotificationProvider;
 import com.seafile.seadroid2.ui.adapter.TransferTaskAdapter;
 import com.seafile.seadroid2.ui.fragment.DownloadTaskFragment;
 import com.seafile.seadroid2.ui.fragment.UploadTaskFragment;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class TransferActivity extends SherlockFragmentActivity {
+
+
+public class TransferActivity extends SeafileActivity {
     private static final String DEBUG_TAG = "TransferActivity";
 
     /**  0 mark as Download Fragment, 1 mark as Upload Fragment, the same convention with {@link TransferTaskAdapter #mTransferTaskType} */
@@ -107,7 +108,7 @@ public class TransferActivity extends SherlockFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getSupportMenuInflater();
+        MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.transfer_list_menu, menu);
         overFlowMenu = menu;
         return true;

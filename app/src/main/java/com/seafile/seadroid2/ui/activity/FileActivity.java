@@ -10,7 +10,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import com.seafile.seadroid2.R;
 import com.seafile.seadroid2.SeafConnection;
 import com.seafile.seadroid2.SeafException;
@@ -32,7 +32,7 @@ import java.net.HttpURLConnection;
 /**
  * Display a file
  */
-public class FileActivity extends SherlockFragmentActivity {
+public class FileActivity extends SeafileActivity {
     private static final String DEBUG_TAG = "FileActivity";
 
     private TextView mFileNameText;

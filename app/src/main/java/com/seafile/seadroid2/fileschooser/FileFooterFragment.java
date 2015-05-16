@@ -1,17 +1,19 @@
 package com.seafile.seadroid2.fileschooser;
 
 
-import com.seafile.seadroid2.R;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FileFooterFragment extends Fragment {
+import com.seafile.seadroid2.R;
+import com.seafile.seadroid2.ui.fragment.SeafileFragment;
+
+;
+
+public class FileFooterFragment extends SeafileFragment {
 
     private TextView statusView;
     private Button cancelButton;

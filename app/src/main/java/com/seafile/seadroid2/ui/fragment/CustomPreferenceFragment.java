@@ -28,7 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.Fragment;;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +44,7 @@ import android.widget.ListView;
  * @author kolavar
  *
  */
-public abstract class CustomPreferenceFragment extends Fragment implements
+public abstract class CustomPreferenceFragment extends SeafileFragment implements
         CustomPreferenceManagerCompat.OnPreferenceTreeClickListener {
 
     private static final String PREFERENCES_TAG = "android:preferences";

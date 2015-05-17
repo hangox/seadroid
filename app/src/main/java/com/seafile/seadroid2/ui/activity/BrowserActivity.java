@@ -29,6 +29,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,7 +42,6 @@ import android.webkit.MimeTypeMap;
 import com.google.common.collect.Lists;
 import com.seafile.seadroid2.ConcurrentAsyncTask;
 import com.seafile.seadroid2.NavContext;
-import me.hangox.seafile.R;
 import com.seafile.seadroid2.SeafConnection;
 import com.seafile.seadroid2.SeafException;
 import com.seafile.seadroid2.SettingsManager;
@@ -105,7 +105,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import me.hangox.seafile.R;
 
+
+/**
+ * 文件展示页面
+ */
 public class BrowserActivity extends SeafileActivity
         implements ReposFragment.OnFileSelectedListener, StarredFragment.OnStarredFileSelectedListener, FragmentManager.OnBackStackChangedListener {
     public static final String PKG_NAME = "com.seafile.seadroid2";
@@ -124,14 +131,22 @@ public class BrowserActivity extends SeafileActivity
     public static final String PICK_FILE_DIALOG_FRAGMENT_TAG = "pick_file_fragment";
 
     private static ArrayList<ServerInfo> serverInfoList = Lists.newArrayList();
-    private static final int[] ICONS = new int[] {
-        R.drawable.tab_library, R.drawable.tab_starred,
-        R.drawable.tab_activity
+    private static final int[] ICONS = new int[]{
+            R.drawable.tab_library, R.drawable.tab_starred,
+            R.drawable.tab_activity
     };
     private int currentPosition = 0;
     private SeafileTabsAdapter adapter;
+
+    @InjectView(R.id.pager)
     private ViewPager pager;
+
+    @InjectView(R.id.indicator)
     private TabPageIndicator indicator;
+
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     private Account account;
     NavContext navContext = new NavContext();
@@ -200,6 +215,7 @@ public class BrowserActivity extends SeafileActivity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabs_main);
+        ButterKnife.inject(this);
 
         // Get the message from the intent
         Intent intent = getIntent();
@@ -209,6 +225,7 @@ public class BrowserActivity extends SeafileActivity
         account = new Account(server, email, null, token);
         Log.d(DEBUG_TAG, "browser activity onCreate " + server + " " + email);
 
+        //服务为空将会调用账号选择
         if (server == null) {
             AccountManager accountManager = new AccountManager(this);
             // get current Account from SharedPreference
@@ -241,7 +258,7 @@ public class BrowserActivity extends SeafileActivity
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        indicator = (TabPageIndicator)findViewById(R.id.indicator);
+        indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         indicator.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -266,42 +283,6 @@ public class BrowserActivity extends SeafileActivity
             }
         });
 
-        if (savedInstanceState != null) {
-            Log.d(DEBUG_TAG, "savedInstanceState is not null");
-            fetchFileDialog = (FetchFileDialog)
-                    getSupportFragmentManager().findFragmentByTag(OPEN_FILE_DIALOG_FRAGMENT_TAG);
-
-            appChoiceDialog = (AppChoiceDialog)
-                getSupportFragmentManager().findFragmentByTag(CHOOSE_APP_DIALOG_FRAGMENT_TAG);
-
-            if (appChoiceDialog != null) {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.detach(appChoiceDialog);
-                ft.commit();
-            }
-
-            SslConfirmDialog sslConfirmDlg = (SslConfirmDialog)
-                getSupportFragmentManager().findFragmentByTag(SslConfirmDialog.FRAGMENT_TAG);
-
-            if (sslConfirmDlg != null) {
-                Log.d(DEBUG_TAG, "sslConfirmDlg is not null");
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.detach(sslConfirmDlg);
-                ft.commit();
-            } else {
-                Log.d(DEBUG_TAG, "sslConfirmDlg is null");
-            }
-
-            String repoID = savedInstanceState.getString("repoID");
-            String repoName = savedInstanceState.getString("repoName");
-            String path = savedInstanceState.getString("path");
-            String dirID = savedInstanceState.getString("dirID");
-            if (repoID != null) {
-                navContext.setRepoID(repoID);
-                navContext.setRepoName(repoName);
-                navContext.setDir(path, dirID);
-            }
-        }
 
         String repoID = intent.getStringExtra("repoID");
         String repoName = intent.getStringExtra("repoName");
@@ -329,6 +310,44 @@ public class BrowserActivity extends SeafileActivity
         startService(monitorIntent);
 
         fetchServerInfo();
+    }
+
+    @Override
+    public void onRestoreState(Bundle savedInstanceState) {
+        Log.d(DEBUG_TAG, "savedInstanceState is not null");
+        fetchFileDialog = (FetchFileDialog)
+                getSupportFragmentManager().findFragmentByTag(OPEN_FILE_DIALOG_FRAGMENT_TAG);
+
+        appChoiceDialog = (AppChoiceDialog)
+                getSupportFragmentManager().findFragmentByTag(CHOOSE_APP_DIALOG_FRAGMENT_TAG);
+
+        if (appChoiceDialog != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.detach(appChoiceDialog);
+            ft.commit();
+        }
+
+        SslConfirmDialog sslConfirmDlg = (SslConfirmDialog)
+                getSupportFragmentManager().findFragmentByTag(SslConfirmDialog.FRAGMENT_TAG);
+
+        if (sslConfirmDlg != null) {
+            Log.d(DEBUG_TAG, "sslConfirmDlg is not null");
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.detach(sslConfirmDlg);
+            ft.commit();
+        } else {
+            Log.d(DEBUG_TAG, "sslConfirmDlg is null");
+        }
+
+        String repoID = savedInstanceState.getString("repoID");
+        String repoName = savedInstanceState.getString("repoName");
+        String path = savedInstanceState.getString("path");
+        String dirID = savedInstanceState.getString("dirID");
+        if (repoID != null) {
+            navContext.setRepoID(repoID);
+            navContext.setRepoName(repoName);
+            navContext.setDir(path, dirID);
+        }
     }
 
     private void fetchServerInfo() {
@@ -428,26 +447,26 @@ public class BrowserActivity extends SeafileActivity
 
         @Override
         public Fragment getItem(int position) {
-                switch (position) {
-                    case 0:
+            switch (position) {
+                case 0:
 
-                        if (reposFragment == null) {
-                            reposFragment = new ReposFragment();
-                        }
-                        return reposFragment;
-                    case 1:
-                        if (starredFragment == null) {
-                            starredFragment = new StarredFragment();
-                        }
-                        return starredFragment;
-                    case 2:
-                        if (activitieFragment == null) {
-                            activitieFragment = new ActivitiesFragment();
-                        }
-                        return activitieFragment;
-                    default:
-                        return new Fragment();
-                }
+                    if (reposFragment == null) {
+                        reposFragment = new ReposFragment();
+                    }
+                    return reposFragment;
+                case 1:
+                    if (starredFragment == null) {
+                        starredFragment = new StarredFragment();
+                    }
+                    return starredFragment;
+                case 2:
+                    if (activitieFragment == null) {
+                        activitieFragment = new ActivitiesFragment();
+                    }
+                    return activitieFragment;
+                default:
+                    return new Fragment();
+            }
         }
 
         @Override
@@ -535,15 +554,15 @@ public class BrowserActivity extends SeafileActivity
     }
 
     public ReposFragment getReposFragment() {
-        return (ReposFragment)getFragment(0);
+        return (ReposFragment) getFragment(0);
     }
 
     public StarredFragment getStarredFragment() {
-        return (StarredFragment)getFragment(1);
+        return (StarredFragment) getFragment(1);
     }
 
     public ActivitiesFragment getActivitiesFragment() {
-        return (ActivitiesFragment)getFragment(2);
+        return (ActivitiesFragment) getFragment(2);
     }
 
     ServiceConnection mConnection = new ServiceConnection() {
@@ -555,12 +574,12 @@ public class BrowserActivity extends SeafileActivity
 
             for (PendingUploadInfo info : pendingUploads) {
                 txService.addTaskToUploadQue(account,
-                                            info.repoID,
-                                            info.repoName,
-                                            info.targetDir,
-                                            info.localFilePath,
-                                            info.isUpdate,
-                                            info.isCopyToLocal);
+                        info.repoID,
+                        info.repoName,
+                        info.targetDir,
+                        info.localFilePath,
+                        info.isUpdate,
+                        info.isCopyToLocal);
             }
             pendingUploads.clear();
         }
@@ -752,84 +771,84 @@ public class BrowserActivity extends SeafileActivity
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-        case android.R.id.home:
-            if (navContext.inRepo()) {
-                onBackPressed();
-            }
-            return true;
-        case R.id.search:
-            Intent searchIntent = new Intent(this, SearchActivity.class);
-            startActivity(searchIntent);
-            return true;
-        case R.id.upload:
-            pickFile();
-            return true;
-        case R.id.transfer_tasks:
-            Intent newIntent = new Intent(this, TransferActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(newIntent);
-            return true;
-        case R.id.accounts:
-            newIntent = new Intent(this, AccountsActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(newIntent);
-            return true;
-        case R.id.refresh:
-            if (!Utils.isNetworkOn()) {
-                ToastUtils.show(this, R.string.network_down);
-                return true;
-            }
-            if (currentPosition == 0) {
+            case android.R.id.home:
                 if (navContext.inRepo()) {
-                    SeafRepo repo = dataManager.getCachedRepoByID(navContext.getRepoID());
-                    if (repo.encrypted && !DataManager.getRepoPasswordSet(repo.id)) {
-                        String password = DataManager.getRepoPassword(repo.id);
-                        showPasswordDialog(repo.name, repo.id,
-                            new TaskDialog.TaskDialogListener() {
-                                @Override
-                                public void onTaskSuccess() {
-                                    getReposFragment().refresh();
-                                }
-                            } , password);
+                    onBackPressed();
+                }
+                return true;
+            case R.id.search:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.upload:
+                pickFile();
+                return true;
+            case R.id.transfer_tasks:
+                Intent newIntent = new Intent(this, TransferActivity.class);
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(newIntent);
+                return true;
+            case R.id.accounts:
+                newIntent = new Intent(this, AccountsActivity.class);
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(newIntent);
+                return true;
+            case R.id.refresh:
+                if (!Utils.isNetworkOn()) {
+                    ToastUtils.show(this, R.string.network_down);
+                    return true;
+                }
+                if (currentPosition == 0) {
+                    if (navContext.inRepo()) {
+                        SeafRepo repo = dataManager.getCachedRepoByID(navContext.getRepoID());
+                        if (repo.encrypted && !DataManager.getRepoPasswordSet(repo.id)) {
+                            String password = DataManager.getRepoPassword(repo.id);
+                            showPasswordDialog(repo.name, repo.id,
+                                    new TaskDialog.TaskDialogListener() {
+                                        @Override
+                                        public void onTaskSuccess() {
+                                            getReposFragment().refresh();
+                                        }
+                                    }, password);
 
-                        return true;
+                            return true;
+                        }
                     }
-                }
 
-                getReposFragment().refresh();
-            } else if (currentPosition == 2) {
-                getActivitiesFragment().refreshView();
-            } else if (currentPosition == 1) {
-                getStarredFragment().refresh();
-            }
-            return true;
-        case R.id.download_folder:
-            final SeafileStyleDialogBuilder builder = new SeafileStyleDialogBuilder(this);
-            builder.setTitle(getString(R.string.download_folder_title));
-            builder.setItems(R.array.download_folder_options_array, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (which == 0) // download folder
-                        downloadDir(navContext.getDirPath(), false);
-                    else if (which == 1) // download folder and subfolders
-                        downloadDir(navContext.getDirPath(), true);
+                    getReposFragment().refresh();
+                } else if (currentPosition == 2) {
+                    getActivitiesFragment().refreshView();
+                } else if (currentPosition == 1) {
+                    getStarredFragment().refresh();
                 }
-            }).show();
-            break;
-        case R.id.newdir:
-            showNewDirDialog();
-            return true;
-        case R.id.newfile:
-            showNewFileDialog();
-            return true;
-        case R.id.camera:
-            CameraTakePhoto();
-            return true;
-        case R.id.settings:
-            Intent settingsIntent = new Intent(BrowserActivity.this,SettingsActivity.class);
-            settingsIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(settingsIntent);
-            return true;
+                return true;
+            case R.id.download_folder:
+                final SeafileStyleDialogBuilder builder = new SeafileStyleDialogBuilder(this);
+                builder.setTitle(getString(R.string.download_folder_title));
+                builder.setItems(R.array.download_folder_options_array, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) // download folder
+                            downloadDir(navContext.getDirPath(), false);
+                        else if (which == 1) // download folder and subfolders
+                            downloadDir(navContext.getDirPath(), true);
+                    }
+                }).show();
+                break;
+            case R.id.newdir:
+                showNewDirDialog();
+                return true;
+            case R.id.newfile:
+                showNewFileDialog();
+                return true;
+            case R.id.camera:
+                CameraTakePhoto();
+                return true;
+            case R.id.settings:
+                Intent settingsIntent = new Intent(BrowserActivity.this, SettingsActivity.class);
+                settingsIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(settingsIntent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -941,11 +960,13 @@ public class BrowserActivity extends SeafileActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    public void setUpButtonTitle(String title){
+    public void setUpButtonTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
 
-    /***********  Start other activity  ***************/
+    /**
+     * ********  Start other activity  **************
+     */
 
     public static final int PICK_FILES_REQUEST = 1;
     public static final int PICK_PHOTOS_VIDEOS_REQUEST = 2;
@@ -985,82 +1006,82 @@ public class BrowserActivity extends SeafileActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-        case PICK_FILES_REQUEST:
-            if (resultCode == RESULT_OK) {
-                String[] paths = data.getStringArrayExtra(MultiFileChooserActivity.MULTI_FILES_PATHS);
-                if (paths == null)
-                    return;
-                ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
-                for (String path : paths) {
-                    addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), path);
-                }
-            }
-            break;
-        case PICK_PHOTOS_VIDEOS_REQUEST:
-            if (resultCode == RESULT_OK) {
-                ArrayList<String> paths = data.getStringArrayListExtra("photos");
-                if (paths == null)
-                    return;
-                ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
-                for (String path : paths) {
-                    addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), path);
-                }
-            }
-            break;
-        case PICK_FILE_REQUEST:
-            if (resultCode == RESULT_OK) {
-                if (!Utils.isNetworkOn()) {
-                    ToastUtils.show(this, R.string.network_down);
-                    return;
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    List<Uri> uriList = UtilsJellyBean.extractUriListFromIntent(data);
-                    if (uriList.size() > 0) {
-                        ConcurrentAsyncTask.execute(new SAFLoadRemoteFileTask(), uriList.toArray(new Uri[]{}));
-                    } else {
-                        ToastUtils.show(BrowserActivity.this, R.string.saf_upload_path_not_available);
-                    }
-                } else {
-                    Uri uri = data.getData();
-                    if (uri != null) {
-                        ConcurrentAsyncTask.execute(new SAFLoadRemoteFileTask(), uri);
-                    } else {
-                        ToastUtils.show(BrowserActivity.this, R.string.saf_upload_path_not_available);
+            case PICK_FILES_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    String[] paths = data.getStringArrayExtra(MultiFileChooserActivity.MULTI_FILES_PATHS);
+                    if (paths == null)
+                        return;
+                    ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
+                    for (String path : paths) {
+                        addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), path);
                     }
                 }
-            }
-            break;
-        case CHOOSE_COPY_MOVE_DEST_REQUEST:
-            if (resultCode == RESULT_OK) {
-                if (!Utils.isNetworkOn()) {
-                    ToastUtils.show(this, R.string.network_down);
-                    return;
+                break;
+            case PICK_PHOTOS_VIDEOS_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    ArrayList<String> paths = data.getStringArrayListExtra("photos");
+                    if (paths == null)
+                        return;
+                    ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
+                    for (String path : paths) {
+                        addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), path);
+                    }
                 }
+                break;
+            case PICK_FILE_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    if (!Utils.isNetworkOn()) {
+                        ToastUtils.show(this, R.string.network_down);
+                        return;
+                    }
 
-                copyMoveIntent = data;
-            }
-            break;
-        case TAKE_PHOTO_REQUEST:
-            if (resultCode == RESULT_OK) {
-                ToastUtils.show(this, getString(R.string.take_photo_successfully));
-                if (!Utils.isNetworkOn()) {
-                    ToastUtils.show(this, R.string.network_down);
-                    return;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        List<Uri> uriList = UtilsJellyBean.extractUriListFromIntent(data);
+                        if (uriList.size() > 0) {
+                            ConcurrentAsyncTask.execute(new SAFLoadRemoteFileTask(), uriList.toArray(new Uri[]{}));
+                        } else {
+                            ToastUtils.show(BrowserActivity.this, R.string.saf_upload_path_not_available);
+                        }
+                    } else {
+                        Uri uri = data.getData();
+                        if (uri != null) {
+                            ConcurrentAsyncTask.execute(new SAFLoadRemoteFileTask(), uri);
+                        } else {
+                            ToastUtils.show(BrowserActivity.this, R.string.saf_upload_path_not_available);
+                        }
+                    }
                 }
+                break;
+            case CHOOSE_COPY_MOVE_DEST_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    if (!Utils.isNetworkOn()) {
+                        ToastUtils.show(this, R.string.network_down);
+                        return;
+                    }
 
-                if(strImgPath == null) {
-                    ToastUtils.show(this, "Unable to upload, no path available");
-                    Log.i(DEBUG_TAG, "Pick file request did not return a path");
-                    return;
+                    copyMoveIntent = data;
                 }
-                ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
-                addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), strImgPath);
+                break;
+            case TAKE_PHOTO_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    ToastUtils.show(this, getString(R.string.take_photo_successfully));
+                    if (!Utils.isNetworkOn()) {
+                        ToastUtils.show(this, R.string.network_down);
+                        return;
+                    }
 
-            }
-            break;
-        default:
-             break;
+                    if (strImgPath == null) {
+                        ToastUtils.show(this, "Unable to upload, no path available");
+                        Log.i(DEBUG_TAG, "Pick file request did not return a path");
+                        return;
+                    }
+                    ToastUtils.show(this, getString(R.string.added_to_upload_tasks));
+                    addUploadTask(navContext.getRepoID(), navContext.getRepoName(), navContext.getDirPath(), strImgPath);
+
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -1072,8 +1093,8 @@ public class BrowserActivity extends SeafileActivity
                 return null;
 
             List<File> fileList = new ArrayList<File>();
-            for (Uri uri: uriList) {
-                File tempDir = new File(DataManager.getExternalTempDirectory(), "saf_temp" + "/" + "upload-"+System.currentTimeMillis());
+            for (Uri uri : uriList) {
+                File tempDir = new File(DataManager.getExternalTempDirectory(), "saf_temp" + "/" + "upload-" + System.currentTimeMillis());
                 File tempFile = new File(tempDir, Utils.getFilenamefromUri(BrowserActivity.this, uri));
 
                 // Log.d(DEBUG_TAG, "Uploading file from uri: " + uri);
@@ -1111,7 +1132,7 @@ public class BrowserActivity extends SeafileActivity
         protected void onPostExecute(File... fileList) {
             ArrayList<Integer> taskIDList = Lists.newArrayList();
 
-            for (File file: fileList) {
+            for (File file : fileList) {
                 if (file == null) {
                     ToastUtils.show(BrowserActivity.this, R.string.saf_upload_path_not_available);
                 } else {
@@ -1133,11 +1154,13 @@ public class BrowserActivity extends SeafileActivity
         }
     }
 
-    /***************  Navigation *************/
+    /**
+     * ************  Navigation ************
+     */
 
     @Override
     public void onFileSelected(SeafDirent dirent) {
-        String fileName= dirent.name;
+        String fileName = dirent.name;
         final String repoName = navContext.getRepoName();
         final String repoID = navContext.getRepoID();
         final String filePath = Utils.pathJoin(navContext.getDirPath(), fileName);
@@ -1163,7 +1186,7 @@ public class BrowserActivity extends SeafileActivity
         ConcurrentAsyncTask.execute(new DownloadDirTask(), repoName, repoID, dirPath, String.valueOf(recurse));
     }
 
-    private class DownloadDirTask extends AsyncTask<String, Void, List<SeafDirent> > {
+    private class DownloadDirTask extends AsyncTask<String, Void, List<SeafDirent>> {
 
         private String repoName;
         private String repoID;
@@ -1327,7 +1350,7 @@ public class BrowserActivity extends SeafileActivity
                     navContext.setDir(parentPath, null);
                     if (parentPath.equals(ACTIONBAR_PARENT_PATH)) {
                         getSupportActionBar().setTitle(navContext.getRepoName());
-                    }else {
+                    } else {
                         getSupportActionBar().setTitle(parentPath.substring(parentPath.lastIndexOf(ACTIONBAR_PARENT_PATH) + 1));
                     }
                 }
@@ -1345,7 +1368,9 @@ public class BrowserActivity extends SeafileActivity
     }
 
 
-    /************  Files ************/
+    /**
+     * *********  Files ***********
+     */
 
     private void startMarkdownActivity(String path) {
         Intent intent = new Intent(this, MarkdownActivity.class);
@@ -1423,6 +1448,7 @@ public class BrowserActivity extends SeafileActivity
             @Override
             public void onCustomActionSelected(CustomAction action) {
             }
+
             @Override
             public void onAppSelected(ResolveInfo appInfo) {
                 String className = appInfo.activityInfo.name;
@@ -1465,6 +1491,7 @@ public class BrowserActivity extends SeafileActivity
     /**
      * Share a file. Generating a file share link and send the link to someone
      * through some app.
+     *
      * @param repoID
      * @param path
      */
@@ -1612,7 +1639,7 @@ public class BrowserActivity extends SeafileActivity
     private void chooseCopyMoveDest(String repoID, String repoName, String path,
                                     String filename, boolean isdir, CopyMoveContext.OP op) {
         copyMoveContext = new CopyMoveContext(repoID, repoName, path, filename,
-                                              isdir, op);
+                isdir, op);
         Intent intent = new Intent(this, SeafilePathChooserActivity.class);
         intent.putExtra(SeafilePathChooserActivity.DATA_ACCOUNT, account);
         SeafRepo repo = dataManager.getCachedRepoByID(repoID);
@@ -1668,15 +1695,15 @@ public class BrowserActivity extends SeafileActivity
             if (currentPosition == 0
                     && repoID.equals(navContext.getRepoID())
                     && Utils.getParentPath(path)
-                            .equals(navContext.getDirPath())) {
+                    .equals(navContext.getDirPath())) {
                 showPasswordDialog(repoName, repoID,
                         new TaskDialog.TaskDialogListener() {
                             @Override
                             public void onTaskSuccess() {
-                                txService.addDownloadTask(account, 
-                                                          repoName, 
-                                                          repoID, 
-                                                          path);
+                                txService.addDownloadTask(account,
+                                        repoName,
+                                        repoID,
+                                        path);
                             }
                         });
                 return;
@@ -1709,8 +1736,9 @@ public class BrowserActivity extends SeafileActivity
     }
 
     private int intShowErrorTime;
+
     private void onFileUploadFailed(int taskID) {
-        if (++ intShowErrorTime <= 1)
+        if (++intShowErrorTime <= 1)
             ToastUtils.show(this, getString(R.string.upload_failed));
     }
 
@@ -1733,11 +1761,11 @@ public class BrowserActivity extends SeafileActivity
 
     @Override
     public boolean onKeyUp(int keycode, KeyEvent e) {
-        switch(keycode) {
-        case KeyEvent.KEYCODE_MENU:
-            if (overFlowMenu !=null) {
-                overFlowMenu.performIdentifierAction(R.id.menu_overflow, 0);
-            }
+        switch (keycode) {
+            case KeyEvent.KEYCODE_MENU:
+                if (overFlowMenu != null) {
+                    overFlowMenu.performIdentifierAction(R.id.menu_overflow, 0);
+                }
         }
 
         return super.onKeyUp(keycode, e);
@@ -1746,7 +1774,8 @@ public class BrowserActivity extends SeafileActivity
     // for receive broadcast from TransferService
     private class TransferReceiver extends BroadcastReceiver {
 
-        private TransferReceiver() {}
+        private TransferReceiver() {
+        }
 
         public void onReceive(Context context, Intent intent) {
             String type = intent.getStringExtra("type");

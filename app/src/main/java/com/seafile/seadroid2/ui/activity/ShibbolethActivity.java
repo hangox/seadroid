@@ -2,6 +2,7 @@ package com.seafile.seadroid2.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,8 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import me.hangox.seafile.R;
 import com.seafile.seadroid2.ui.ToastUtils;
+
+import me.hangox.seafile.R;
 
 /**
  * Shibboleth welcome page
@@ -52,8 +54,9 @@ public class ShibbolethActivity extends SeafileActivity {
             }
         });
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(R.string.shib_actionbar_title);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(R.string.shib_actionbar_title);
     }
 
     public void onHttpsCheckboxClicked(View view) {

@@ -8,8 +8,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 
-import me.hangox.seafile.R;
 import com.seafile.seadroid2.ui.fragment.SettingsPreferenceFragment;
+
+import me.hangox.seafile.R;
 
 
 public class SettingsActivity extends SeafileActivity {
@@ -17,10 +18,11 @@ public class SettingsActivity extends SeafileActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         Log.d(DEBUG_TAG, "SettingsActivity.onCreate is called");
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         // This has to be called before setContentView and you must use the
         // class in android.support.v4.view and NOT android.view
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 
         setContentView(R.layout.settings_activity_layout);
         FragmentManager fragmentManager = getSupportFragmentManager();

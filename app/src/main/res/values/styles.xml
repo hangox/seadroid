@@ -23,7 +23,7 @@
         <item name="vpiUnderlinePageIndicatorStyle">@style/CustomUnderlinePageIndicator</item>
     </style>
 
-    <style name="CustomTitlePageIndicator">
+    <style name="CustomTitlePageIndicator" parent="Widget.TabPageIndicator">
         <item name="android:background">#18FF0000</item>
         <item name="footerColor">#FFAA2222</item>
         <item name="footerLineHeight">1dp</item>
@@ -39,7 +39,7 @@
         <item name="lineWidth">30dp</item>
         <item name="unselectedColor">#FF888888</item>
         <item name="selectedColor">#FF880000</item>
-    </style>
+    </style>\
 
     <style name="CustomCirclePageIndicator">
         <item name="fillColor">#FF888888</item>

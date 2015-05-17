@@ -1,5 +1,6 @@
 package com.seafile.seadroid2.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -9,4 +10,15 @@ import android.support.v7.app.AppCompatActivity;
  * Time 16:21
  */
 public class SeafileActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) onRestoreState(savedInstanceState);
+    }
+
+    public void onRestoreState(Bundle savedInstanceState){
+
+    }
 }
